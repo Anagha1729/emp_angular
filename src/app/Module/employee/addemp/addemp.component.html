@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2 bg-dark d-flex flex-column" style="height: 92vh; width: fit-content;">
+        <a routerLink="/home" class="mt-3 text-decoration-none text-light fe-bolder">Home</a>
+        <a routerLink="/employee" class="mt-3 text-decoration-none text-light fe-bolder">Employee</a>
+        <button class="btn btn-link mt-auto">Logout</button>
+    </div>
+    <div class="col-lg-10">
+        <div class="p-5 w-100 d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
+            <h1>Add Employee Details</h1>
+            <form action="" class="border rounded p-3 w-50 shadow" (ngSubmit)="getAddedData()" #empForm="ngForm">
+
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" required [(ngModel)]="user.empId"  name= "id" id="floatingId" placeholder="Employee Id" #employeeId="ngModel">
+                <label for="floatingId">Employee Id</label>
+            </div>
+            
+            <div class="text-danger" *ngIf="employeeId.invalid && employeeId.touched">
+                *Invalid Employee Id
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" required minlength="4" pattern="[a-zA-z0-9]*" [(ngModel)]="user.username"  name= "username" id="floatigInput" placeholder="username" #username="ngModel">
+                <label for="floatingInput">Username</label>
+             </div>
+             <div class="text-danger" *ngIf="employeeId.invalid && employeeId.touched">
+                *Invalid username
+            </div>
+             <div class="form-floating mb-3">
+                <input type="email" class="form-control" required email [(ngModel)]="user.email" name="email" id="floatigInputEmail" placeholder="name@example.com" #email="ngModel">
+                <label for="floatingInputEmail">Email address</label>
+             </div>
+             <div class="text-danger" *ngIf="employeeId.invalid && employeeId.touched">
+                *Invalid email address
+            </div>
+
+             <div class="form-floating mb-3">
+                <select name="" id="statusselect" class="form-control" required [(ngModel)]="user.status"  name= "status" #status="ngModel">
+                    <option value="" disabled selected hidden></option>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                     </select>
+            <label for="statusselect">Status</label>
+             </div>
+             <div class="text-danger" *ngIf="employeeId.invalid && employeeId.touched">
+                *Invalid status
+            </div>
+             <div class="text-center mt-3">
+                <button class="btn btn-success"[disabled]="empForm.invalid">Add</button>
+                <button class="btn btn-warning ms-3">Cancel</button>
+             </div>
+             </form>
+       
+    </div>
+    </div>
+    </div>

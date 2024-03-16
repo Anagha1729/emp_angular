@@ -1,0 +1,65 @@
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 bg-dark d-flex flex-column" style="height: 92vh; width: fit-content;">
+            <a routerLink="/home" class="mt-3 text-decoration-none text-light fe-bolder">Home</a>
+            <a routerLink="/employee" class="mt-3 text-decoration-none text-light fe-bolder">Employee</a>
+            <button class="btn btn-link mt-auto">Logout</button>
+        </div>
+        <div class="col-lg-10 p-3">
+            <div class="d-flex flex-row justify-content-between">
+                <h3>Employee</h3>
+                <a routerLink="/employee/add" class="btn btn-success">
+                    Add
+                    <i class="fa-solid fa-plus"></i>
+                </a>
+            </div>
+            <h4>{{d | date}}</h4>
+            <div class="row">
+            <div class="d-flex justify-content-between col">
+               <input type="text" class="form-control" width="10" [(ngModel)]="searchKey" placeholder="Enter Username to Search">
+               <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  Sort
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item"(click)="sortByUserID()" >search by Id</a></li>
+                  <li><a class="dropdown-item"(click)="sortByUsername()" >search by Username</a></li>
+                 
+                </ul>
+              </div>
+            </div>
+                 <div class="col">
+                    <button class="btn btn- float-end" (click)="exportToPdf()">Export</button>
+                 </div>
+</div>
+
+            <div class="mt-3 border border-dark shadow p-3">
+                <table class="table table-bordered">
+                    <tr class="bg-info">
+                        <th>Id</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr *ngFor="let i of employee | search:searchKey">
+                        <td>{{i.empId}}</td>
+                        <td>{{i.username}}</td>
+                        <td>{{i.email}}</td>
+                        <td>
+                            <span [ngClass]="i.status=='Active'?'bg-success rounded':'bg-warning rounded'">
+                                {{i.status}}
+                            </span>
+                           </td>
+                        <td>
+                           <a routerLink="/employee/edit/{{i.id}}" >
+                            <i class="fa-solid fa-pen-to-square" style="color: #FFD43B;"></i></a>
+                            <button class="btn"><i class="fa-solid fa-trash" style="color: #c21426;"(click)="handleDelete(i.id)"></i></button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+        </div></div>
+
